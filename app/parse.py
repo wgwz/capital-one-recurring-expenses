@@ -1,12 +1,8 @@
-import argparse
 import pandas as pd
 
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('file', type=argparse.FileType('r'))
-    args = parser.parse_args()
-    df = pd.read_csv(args.file)
+def parse(filepath):
+    df = pd.read_csv(filepath)
     df["Transaction Date"] = pd.to_datetime(df["Transaction Date"], format="%m/%d/%y")
     df = df[df["Transaction Amount"] < 0]
     report_data = []
